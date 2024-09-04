@@ -40,7 +40,7 @@ function Nav() {
             />
           </svg>
         </button>
-        <div
+        {/* <div
           className={`${isNavOpen ? "" : "hidden"} w-full md:block md:w-auto`}
           id="navbar-default"
         >
@@ -72,7 +72,7 @@ function Nav() {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
       </div>
     </nav>
   );
