@@ -11,7 +11,7 @@ function Home() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3000/shorten', {
+      const response = await axios.post('https://url-shortner-ngnn.onrender.com/shorten', {
         longUrl: url,
         shortCode: shortCode // Ensure the short code is trimmed
       });
