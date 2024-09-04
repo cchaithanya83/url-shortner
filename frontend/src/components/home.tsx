@@ -1,4 +1,4 @@
-import  { useState, useEffect  } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function Home() {
@@ -6,6 +6,7 @@ function Home() {
   const [shortCode, setShortCode] = useState(''); // State for custom short code
   const [shortenedUrl, setShortenedUrl] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); // Loading state
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -20,24 +21,28 @@ function Home() {
     fetchInitialData();
   }, []);
 
-  const handleSubmit = async (event: { preventDefault: () => void; }) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true); // Set loading to true
 
     try {
       const response = await axios.post('https://url-shortner-ngnn.onrender.com/shorten', {
         longUrl: url,
-        shortCode: shortCode // Ensure the short code is trimmed
+        shortCode: shortCode.trim() // Ensure the short code is trimmed
       });
 
       setShortenedUrl(response.data.shortUrl);
       setError(''); // Clear any previous errors
     } catch (error) {
-      setError( 'Failed to shorten the URL');
+      setError('URL already exists use somethign else');
       setShortenedUrl(''); // Clear the shortened URL on error
+    } finally {
+      setLoading(false); // Set loading to false
     }
   };
+
   return (
-    <div className="p-6  min-h-screen flex items-center justify-center">
+    <div className="p-6 min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <div className="mb-6">
           <label htmlFor="URL" className="block mb-2 text-sm font-medium text-gray-900">
@@ -84,6 +89,11 @@ function Home() {
         >
           Submit
         </button>
+        {loading && (
+          <div className="mt-4 text-blue-600 text-sm">
+            <p>Loading...</p> {/* You can replace this with a spinner if desired */}
+          </div>
+        )}
         {shortenedUrl && (
           <p className="mt-4 text-green-600 text-sm">
             Shortened URL: <a href={shortenedUrl} className="underline">{shortenedUrl}</a>
