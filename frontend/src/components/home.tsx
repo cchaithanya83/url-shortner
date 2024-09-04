@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import axios from 'axios';
 
 function Home() {
@@ -7,7 +7,7 @@ function Home() {
   const [shortenedUrl, setShortenedUrl] = useState('');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
 
     try {
@@ -19,7 +19,7 @@ function Home() {
       setShortenedUrl(response.data.shortUrl);
       setError(''); // Clear any previous errors
     } catch (error) {
-      setError(error.response?.data?.error || 'Failed to shorten the URL');
+      setError( 'Failed to shorten the URL');
       setShortenedUrl(''); // Clear the shortened URL on error
     }
   };
