@@ -21,7 +21,7 @@ function Home() {
     fetchInitialData();
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
     setLoading(true); // Set loading to true
 
@@ -30,11 +30,12 @@ function Home() {
         longUrl: url,
         shortCode: shortCode.trim() // Ensure the short code is trimmed
       });
+      
 
       setShortenedUrl(response.data.shortUrl);
       setError(''); // Clear any previous errors
     } catch (error) {
-      setError('URL already exists use somethign else');
+      setError('URL already exists use something else');
       setShortenedUrl(''); // Clear the shortened URL on error
     } finally {
       setLoading(false); // Set loading to false
