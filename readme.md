@@ -4,6 +4,10 @@
 
 This project is a full-stack web application for shortening URLs. It consists of a backend built with Node.js, Express, and Firebase Firestore, and a frontend built with React and TypeScript (ReactTSX).
 
+## Project Link
+
+[Url shortner](https://ckshorturl.netlify.app/)
+
 ## Table of Contents
 
 - [Overview](#overview)
