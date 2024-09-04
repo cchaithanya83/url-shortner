@@ -28,6 +28,16 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // API to shorten a URL with a custom short URL
+app.get('/initial-data', (req, res) => {
+  const dummyData = {
+    message: "Welcome to the URL Shortener!",
+    info: "developed by Chaithanya K.",
+    timestamp: new Date().toISOString()
+  };
+
+  res.status(200).json(dummyData);
+});
+
 app.post("/shorten", async (req, res) => {
   const { longUrl, shortCode } = req.body;
 

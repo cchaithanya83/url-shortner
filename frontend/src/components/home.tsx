@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState, useEffect  } from 'react';
 import axios from 'axios';
 
 function Home() {
@@ -6,6 +6,19 @@ function Home() {
   const [shortCode, setShortCode] = useState(''); // State for custom short code
   const [shortenedUrl, setShortenedUrl] = useState('');
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchInitialData = async () => {
+      try {
+        const response = await axios.get('https://url-shortner-ngnn.onrender.com/initial-data');
+        console.log(response.data);
+      } catch (error) {
+        console.error('Error fetching initial data:', error);
+      }
+    };
+
+    fetchInitialData();
+  }, []);
 
   const handleSubmit = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
